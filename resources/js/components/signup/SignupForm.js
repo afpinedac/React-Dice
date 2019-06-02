@@ -122,8 +122,5 @@ SignupForm.propTypes = {
   addFlashMessage: PropTypes.func.isRequired
 }
 
-SignupForm.contextTypes = {
-  router: PropTypes.object.isRequired
-}
 
 export default withRouter(SignupForm)
