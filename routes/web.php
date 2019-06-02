@@ -13,3 +13,6 @@
 
 Route::view('/{path?}', 'app');
 
+Route::group(['prefix' => 'api'], function () {
+    Route::post('/users', ['uses' => 'UsersController@postRegister'])->name('register');
+});
