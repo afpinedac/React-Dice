@@ -3,6 +3,7 @@ import timezones from '../../data/timezones'
 import map from 'lodash/map'
 import PropTypes from 'prop-types'
 import classname from 'classnames'
+import TextFieldGroup from '../common/TextFieldGroup'
 
 class SignupForm extends Component {
 
@@ -48,17 +49,13 @@ class SignupForm extends Component {
     return (
       <form onSubmit={this.onSubmit} className="form">
         <h1>Join our community</h1>
-        <div className={classname('form-group', {'has-error': errors.username})}>
-          <label htmlFor="" className="control-label">Username</label>
-          <input
-            value={this.state.username}
-            onChange={this.onChange}
-            type="text"
-            name="username"
-            className="form-control"
-          />
-          {errors.username && <span className="help-block">{errors.username[0]}</span>}
-        </div>
+        <TextFieldGroup
+          onChange={this.onChange}
+          error={errors.username}
+          field="username"
+          value={this.state.username}
+          label="Username"
+        />
         <div className={classname('form-group', {'has-error': errors.email})}>
           <label htmlFor="" className="control-label">E-mail</label>
           <input
