@@ -14,5 +14,6 @@
 Route::view('/{path?}', 'app');
 
 Route::group(['prefix' => 'api'], function () {
-    Route::post('/users', ['uses' => 'UsersController@postRegister'])->name('register');
+    Route::post('/users', ['uses' => 'UsersController@postRegister'])->name('user.register');
+    Route::get('/users/{username}', ['uses' => 'UsersController@getByUsername'])->name('user.profile');
 });

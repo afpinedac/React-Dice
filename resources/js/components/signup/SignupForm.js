@@ -43,6 +43,29 @@ class SignupForm extends Component {
       })
   }
 
+  checkUserExists (e) {
+    const field = e.target.name
+    const val = e.target.value
+
+    if (val != '') {
+      this.props.isUserExists(val)
+        .then(res => {
+          let errors = this.state.errors
+
+          if (res.data.errors) {
+            errors[field] = [`There is an user with such ${field}`]
+          } else {
+            errors[field] = ''
+          }
+
+          this.setState({errors: errors})
+        }, () => {
+
+        })
+
+    }
+  }
+
   render () {
 
     const options = map(timezones, (v, k) =>
@@ -60,6 +83,7 @@ class SignupForm extends Component {
           field="username"
           value={this.state.username}
           label="Username"
+          checkUsersExists={e => {this.checkUserExists(e)}}
         />
         <div className={classname('form-group', {'has-error': errors.email})}>
           <label htmlFor="" className="control-label">E-mail</label>
@@ -69,6 +93,7 @@ class SignupForm extends Component {
             type="text"
             name="email"
             className="form-control"
+            onBlur={(e) => this.checkUserExists(e)}
           />
           {errors.email && <span className="help-block">{errors.email[0]}</span>}
         </div>
@@ -108,7 +133,7 @@ class SignupForm extends Component {
           {errors.timezone && <span className="help-block">{errors.timezone[0]}</span>}
         </div>
         <div className="form-group">
-          <button  className="btn btn-primary btn-lg">
+          <button className="btn btn-primary btn-lg">
             Sign up
           </button>
         </div>
@@ -119,8 +144,8 @@ class SignupForm extends Component {
 
 SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
+  addFlashMessage: PropTypes.func.isRequired,
+  isUserExists: PropTypes.func.isRequired
 }
-
 
 export default withRouter(SignupForm)
