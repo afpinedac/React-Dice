@@ -30,7 +30,6 @@ class SignupForm extends Component {
   onSubmit (e) {
     e.preventDefault()
     this.setState({errors: {}, isLoading: true})
-    console.log(this.state)
     this.props.userSignupRequest(this.state)
       .then(() => {
         this.props.addFlashMessage({

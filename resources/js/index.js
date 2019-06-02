@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk' //allow us to dispatch asynchronous actions
 import rootReducer from './rootReducer'
+import LoginPage from './components/login/LoginPage'
 
 const store = createStore(
   rootReducer,
@@ -21,6 +22,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Route path="/" component={App}/>
       <Route path="/signup" component={SignupPage}/>
+      <Route path="/login" component={LoginPage}/>
     </BrowserRouter>
   </Provider>, document.getElementById('app')
 )

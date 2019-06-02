@@ -13,6 +13,9 @@ export default () => {
         <div className="">
           <ul className="nav navbar-nav navbar-right">
             <li>
+              <Link to="/login">Log in</Link>
+            </li>
+            <li>
               <Link to="/signup">Sign up</Link>
             </li>
           </ul>
