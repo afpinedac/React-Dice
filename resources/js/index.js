@@ -4,12 +4,16 @@ import App from './components/App'
 import SignupPage from './components/signup/SignupPage'
 import { Route, BrowserRouter, Link, } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk' //allow us to dispatch asynchronous actions
+import rootReducer from './rootReducer'
 
 const store = createStore(
-  (state = {}) => state,
-  applyMiddleware(thunk)
+  rootReducer,
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 )
 
 ReactDOM.render(

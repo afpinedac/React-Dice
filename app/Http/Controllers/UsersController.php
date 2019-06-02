@@ -23,7 +23,7 @@ class UsersController extends Controller
         }
 
         return response()->json([
-            'name' => 'nadres'
+            'success' => true
         ]);
     }
 }

@@ -18,7 +18,7 @@ const TextFieldGroup = ({field, value, label, error, type, onChange}) => {
   )
 }
 
-TextFieldGroup.PropTypes = {
+TextFieldGroup.propTypes = {
   field: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,

@@ -4,6 +4,7 @@ import map from 'lodash/map'
 import PropTypes from 'prop-types'
 import classname from 'classnames'
 import TextFieldGroup from '../common/TextFieldGroup'
+import { withRouter } from 'react-router-dom'
 
 class SignupForm extends Component {
 
@@ -32,7 +33,11 @@ class SignupForm extends Component {
     console.log(this.state)
     this.props.userSignupRequest(this.state)
       .then(() => {
-
+        this.props.addFlashMessage({
+          type: 'success',
+          text: 'You have signed up!'
+        })
+        this.props.history.push('/')
       }, ({response}) => {
         this.setState({errors: response.data, isLoading: false})
       })
@@ -103,7 +108,7 @@ class SignupForm extends Component {
           {errors.timezone && <span className="help-block">{errors.timezone[0]}</span>}
         </div>
         <div className="form-group">
-          <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">
+          <button  className="btn btn-primary btn-lg">
             Sign up
           </button>
         </div>
@@ -113,7 +118,12 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
 }
 
-export default SignupForm
+SignupForm.contextTypes = {
+  router: PropTypes.object.isRequired
+}
+
+export default withRouter(SignupForm)
